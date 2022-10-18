@@ -1,28 +1,34 @@
 package com.example.notificacion
 
 import android.annotation.SuppressLint
-import android.app.Dialog
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.RingtoneManager
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.widget.Button
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class MainActivity : AppCompatActivity()  {
     companion object {
-        const val MY_CHANNEL = "myChannel"
+        const val channelId = "com.parkea"
     }
+
+    private lateinit var notificationManager: NotificationManager
+    lateinit var builder: NotificationCompat.Builder
+    private lateinit var time : String
+    var hms = "30:00"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,17 +43,8 @@ class MainActivity : AppCompatActivity()  {
         }
     }
 
-    private fun alert1() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Hola")
-        builder.setMessage("Bhsgdkha sahgdasdgahsgd dkgashdgak jhsdghasdg")
-        builder.setPositiveButton(android.R.string.ok) { _, _ -> alert2() }
-        builder.setNegativeButton("Cancelar",null)
-        builder.show()
-    }
-
     @SuppressLint("InflateParams")
-    private fun alert2() {
+    private fun alert1() {
         val dialogBinding = layoutInflater.inflate(R.layout.custom_alert_1,null)
         val myDialog = Dialog(this)
 
@@ -62,8 +59,10 @@ class MainActivity : AppCompatActivity()  {
 
         yesBtn.setOnClickListener {
             myDialog.dismiss()
-            createNotification()
-            alert3()
+            initializeTimerTask("30")
+            createTimerNotification()
+            createReminder()
+            alert2()
         }
 
         noBtn.setOnClickListener {
@@ -72,7 +71,7 @@ class MainActivity : AppCompatActivity()  {
     }
 
     @SuppressLint("InflateParams")
-    private fun alert3() {
+    private fun alert2() {
         val dialogBinding = layoutInflater.inflate(R.layout.custom_alert_2,null)
         val myDialog = Dialog(this)
 
@@ -89,14 +88,31 @@ class MainActivity : AppCompatActivity()  {
         }
     }
 
+    private fun initializeTimerTask(time: String?) {
+
+        object : CountDownTimer(time!!.toLong() * 1000 * 60, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val f: NumberFormat = DecimalFormat("00")
+                val min = millisUntilFinished / 60000 % 60
+                val sec = millisUntilFinished / 1000 % 60
+                hms = f.format(min).toString() + ":" + f.format(sec)
+                raiseNotification(builder, hms)
+            }
+
+            override fun onFinish() {
+                hms = "00:00"
+            }
+        }.start()
+    }
+
     private fun createChannel() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                MY_CHANNEL,
+                channelId,
                 "MySuperChannel",
                 NotificationManager.IMPORTANCE_HIGH
             ).apply {
-                description = "NoSeQueVaAqui"
+                description = "Test Notification"
             }
 
             val notificationManager : NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -105,34 +121,51 @@ class MainActivity : AppCompatActivity()  {
     }
 
     @SuppressLint("SimpleDateFormat")
-    private fun createNotification() {
+    private fun createTimerNotification() {
+
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val intent = Intent(this,MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 
-        var myTime = (Calendar.getInstance().timeInMillis) + 1800000
-        val format = SimpleDateFormat("HH:mm")
-        val time = format.format(myTime)
-
         val flag = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
         val pendingIntent : PendingIntent = PendingIntent.getActivity(this, 0, intent, flag)
 
-        val builder = NotificationCompat.Builder(this,MY_CHANNEL)
+        val myTime = (Calendar.getInstance().timeInMillis) + 1800000
+        val format = SimpleDateFormat("HH:mm")
+        time = format.format(myTime)
+
+        builder = NotificationCompat.Builder(this, channelId)
+            .setContentTitle("Reserva Parqueadero")
+            .setStyle(NotificationCompat.BigTextStyle().bigText("Tiempo restante para finalizar la reserva: $hms \nEl tiempo de su reserva termina a las $time."))
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Titulo de la notificacion")
-            .setContentText("El tiempo de su reserva termina a las $time")
-            //.setStyle(NotificationCompat.BigTextStyle().bigText("Texto de la notificacion.\nClic para mas info\nEl tiempo de su areserva es tantos minutos y segundos"))
             .setContentIntent(pendingIntent)
             .setColor(resources.getColor(android.R.color.holo_blue_dark))
-            .setSilent(true)
-            .setUsesChronometer(true)
+            .setOnlyAlertOnce(true)
             .setTimeoutAfter(1800000)
-            .setOngoing(true)
+            .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+            .setDefaults(Notification.DEFAULT_VIBRATE)
             .setPriority(NotificationCompat.PRIORITY_MAX)
 
         with(NotificationManagerCompat.from(this)) {
             notify(1, builder.build())
         }
+    }
+
+    private fun raiseNotification(b: NotificationCompat.Builder, hms: String) {
+        b.setStyle(NotificationCompat.BigTextStyle().bigText("Tiempo restante para finalizar la reserva: $hms \nEl tiempo de su reserva termina a las $time."))
+        b.setOngoing(true)
+
+        notificationManager.notify(1, b.build())
+    }
+
+    @SuppressLint("UnspecifiedImmutableFlag")
+    fun createReminder() {
+        val i =  Intent(this,Reminder::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this,0,i,0)
+        val a = getSystemService(ALARM_SERVICE) as AlarmManager
+        val myTime = (Calendar.getInstance().timeInMillis) + 1800000
+        a.set(AlarmManager.RTC_WAKEUP,myTime,pendingIntent)
     }
 }
