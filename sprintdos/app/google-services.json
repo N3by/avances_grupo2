@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "238509312029",
+    "project_id": "myparkea-8a1a3",
+    "storage_bucket": "myparkea-8a1a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238509312029:android:aec211e1d607ce5c32def4",
+        "android_client_info": {
+          "package_name": "com.example.myparkea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238509312029-c4hjcgft6bo1ognfj8s3qka8sevo5vu0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myparkea",
+            "certificate_hash": "b3a3506ad7455101e63cc4080eef7a2ffdd0f139"
+          }
+        },
+        {
+          "client_id": "238509312029-roigfk35i98klp47ivvsfas0qb749tma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJWCOEuXZzeCjCD9tceQ2fqoUYYFfWnv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "238509312029-roigfk35i98klp47ivvsfas0qb749tma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

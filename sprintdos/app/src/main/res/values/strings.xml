@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Parkea!</string>
+    <string name="prefs_file">com.example.myparkea.PREFERENCE_FILE_KEY</string>
+    <string name="web_client_id" translatable="false">238509312029-roigfk35i98klp47ivvsfas0qb749tma.apps.googleusercontent.com</string>
+
+    <string name="Loading">Loading…</string>
+    <string name="Inicio">Inicio</string>
+    <string name="Usuario">Usuario</string>
+    <string name="Contrase_a">Contraseña</string>
+    <string name="Contrase_a_c">Confirmar Contraseña</string>
+    <string name="Imagen_Inicio">Imagen de inicio</string>
+    <string name="Resgistrase">Registrarse</string>
+    <string name="SincCuenta">¿Aún no tienes cuenta?</string>
+    <string name="Yacuenta">¿Ya tienes una cuenta?</string>
+    <string name="crearcuenta">Crea una Cuenta</string>
+    <string name="Ingresar">Ingresar</string>
+    <string name="IngresarGoogle">Ingresar con Google</string>
+    <string name="Image_Profile">Image Profile</string>
+    <string name="Volver">Volver</string>
+    <string name="Salir">salir</string>
+    <string name="Menu">Menú</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="entrar">Entrar</string>
+    <string name="guardar">Guardar</string>
+    <string name="registro">Registro</string>
+    <string name="recuerdame">Recuérdame</string>
+
+    <string name="require">Campo Requerido*</string>
+    <string name="Aceptar">Aceptar</string>
+
+    <string name="nombre">Nombre Completo</string>
+    <string name="apellido">Apellido</string>
+    <string name="doc">Documento</string>
+    <string name="cel">Celular</string>
+    <string name="Correo">Correo</string>
+    <string name="CorreoE">Correo Electrónico</string>
+    <string name="dir">Dirección</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string name="Desc_Logo">Logo de la aplicación. Es un marcador de ubicación con un auto.</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
+    <string name="chooser_title">Elegir App</string>
+
+    <string name="reserva_de_parqueadero">Reserva de Parqueadero</string>
+    <string name="reserva_par_sele">¿Desea realizar la reserva en el parqueadero selecionado?</string>
+    <string name="si">Si</string>
+    <string name="reserva_exitosa">Reserva Exitosa</string>
+    <string name="acept_reserva">Por favor recuerde NO cerrar la aplicación y que dispone de 30 minutos para llegar al parqueadero, pasado el tiempo su reserva se liberará.</string>
+    <string name="ok">ok</string>
+    <string name="no">No</string>
+</resources>

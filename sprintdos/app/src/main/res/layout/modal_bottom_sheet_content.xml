@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@android:color/transparent">
+
+    <FrameLayout
+        android:id="@+id/standard_Bottom_Sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/infocard"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:behavior_peekHeight="300dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_card_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close"
+            android:background="@color/card"
+            android:layout_gravity="right|top"/>
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="5dp"
+            android:layout_gravity="center|top"
+            android:background="@color/white"
+            android:src="@drawable/ic_remove" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="5dp"
+                android:text="Parqueadero Juanito"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Cra 14 # 89 - 48"
+                android:textColor="@color/dark"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Bogotá D.C"
+                android:textColor="@color/dark"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="Abierto"
+                android:textColor="#0F6C11"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lunea a Viernes"
+                    android:textColor="@color/dark"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="6:00 a 22:00"
+                    android:textColor="@color/dark"
+                    android:textSize="16sp"
+                    android:gravity="right"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="@color/black"
+                android:src="@drawable/ic_remove" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sabados - Domingos - Festivos"
+                    android:textColor="@color/dark"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="7:00 a 15:00"
+                    android:textColor="@color/dark"
+                    android:textSize="16sp"
+                    android:gravity="right"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <Button
+                    android:id="@+id/btn_card_notificacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="50dp"
+                    android:backgroundTint="@color/white"
+                    android:text="Solicitar Reserva"
+                    android:textColor="@color/dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="12dp" />
+
+                <ImageButton
+                    android:id="@+id/btn_card_direccion"
+                    android:layout_width="60dp"
+                    android:layout_height="57dp"
+                    android:layout_weight="1"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/btn_direccion"
+                    app:srcCompat="@drawable/ic_direction" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
